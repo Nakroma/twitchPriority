@@ -1,0 +1,49 @@
+<head>
+    <title>twitchPriority</title>
+    <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+
+            {{> channels}}
+
+        </div>
+        <div class="col-md-9" id="view">
+
+            {{> loginButtons}}
+            <br>
+
+            {{> twitchPlayer}}
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+<template name="channels">
+    <div class="pre-scrollable" style="max-height: 100vh;">
+        <table class="table" id="list">
+            <thead>
+                <tr>
+                    <th>Channel</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#each channels}}
+                <tr>
+                    <td><img src='{{logo}}' class='profile-pic'>&nbsp;&nbsp;&nbsp;{{display_name}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<template name="twitchPlayer">
+    <div id="twitchPlayer"></div>
+</template>

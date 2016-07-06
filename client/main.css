@@ -1,0 +1,19 @@
+/* Drag and Drop */
+
+.ui-sortable tr {
+    cursor:pointer;
+}
+.ui-sortable tr:hover {
+    background:rgba(244,251,17,0.45);
+}
+
+
+/* Table */
+
+.profile-pic {
+    max-width: 15%;
+}
+
+.channel {
+    background-position: center;
+}
