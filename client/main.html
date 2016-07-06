@@ -7,15 +7,16 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3" id="{{loggedOn}}">
 
-            {{> channels}}
+            {{#if currentUser}}
+                {{> channels}}
+            {{else}}
+                <div align="center" style="margin-top: 65vh;">{{> login}}</div>
+            {{/if}}
 
         </div>
         <div class="col-md-9" id="view">
-
-            {{> loginButtons}}
-            <br>
 
             {{> twitchPlayer}}
 
@@ -25,18 +26,28 @@
 
 </body>
 
+<template name="login">
+    {{#if currentUser}}
+        <a href="#" id="logout">Logout</a>
+    {{else}}
+        <button id="login" class="btn-Twitch"></button>
+    {{/if}}
+</template>
+
 <template name="channels">
-    <div class="pre-scrollable" style="max-height: 100vh;">
+    <div class="pre-scrollable" style="max-height: 100vh; width: 100%;">
         <table class="table" id="list">
             <thead>
                 <tr>
-                    <th>Channel</th>
+                    <th>Channels</th>
+                    <th>{{> login}}</th>
                 </tr>
             </thead>
             <tbody>
             {{#each channels}}
                 <tr>
                     <td><img src='{{logo}}' class='profile-pic'>&nbsp;&nbsp;&nbsp;{{display_name}}</td>
+                    <td></td>
                 </tr>
             {{/each}}
             </tbody>

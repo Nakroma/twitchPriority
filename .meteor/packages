@@ -19,8 +19,8 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 twbs:bootstrap
 http
-accounts-ui
 jameslefrere:accounts-twitch
 accounts-password
 session
 mizzao:jquery-ui
+accounts-ui-unstyled

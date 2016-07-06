@@ -17,3 +17,33 @@
 .channel {
     background-position: center;
 }
+
+.btn-Twitch {
+    height: 32px;
+    width: 170px;
+    border: none;
+    background-image: url('https://camo.githubusercontent.com/f1266002daa15b9aeeb5ab511afef6aa4faffdb5/687474703a2f2f7474762d6170692e73332e616d617a6f6e6177732e636f6d2f6173736574732f636f6e6e6563745f6c696768742e706e67');
+}
+
+#channels {
+    padding-right: 0;
+    height: 100vh;
+    background: url('bg.png') center;
+}
+
+#channels_cur {
+    padding-right: 0;
+    height: 100vh;
+}
+
+#channels_cur:after {
+    content: '';
+    background: url('bg_2.png') center;
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}

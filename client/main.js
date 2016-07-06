@@ -4,19 +4,21 @@ import { Session } from 'meteor/session';
 import './main.html';
 
 Template.body.onCreated(function bodyOnCreated() {
-    Session.set('playerRendered', false);
-    Meteor.call('channelsFollowed.refresh');
-    Meteor.call('channelsLive.refresh');
-
-    Meteor.subscribe('userData');
-
-    // Cron
-    setInterval(function(){
-        Meteor.call('channelsLive.refresh');
-    }, 1000*60*2);
-    setInterval(function(){
+    if (Meteor.user()) {
         Meteor.call('channelsFollowed.refresh');
-    }, 1000*60*10);
+        Meteor.call('channelsLive.refresh');
+
+        // Cron
+        setInterval(function(){
+            Meteor.call('channelsLive.refresh');
+        }, 1000*60*2);
+        setInterval(function(){
+            Meteor.call('channelsFollowed.refresh');
+        }, 1000*60*10);
+    }
+
+    Session.set('playerRendered', false);
+    Meteor.subscribe('userData');
 });
 
 Template.twitchPlayer.rendered = function() {
@@ -41,6 +43,16 @@ Template.channels.helpers({
             }
         }
         return Meteor.user().follows;
+    }
+});
+
+Template.body.helpers({
+    loggedOn() {
+        if (Meteor.user()) {
+            return 'channels_cur';
+        } else {
+            return 'channels';
+        }
     }
 });
 
@@ -75,3 +87,21 @@ function getHighestPriority(channels, streams) {;
         }
     }
 }
+
+Template.login.events({
+    'click #login': function(event) {
+        Meteor.loginWithTwitch({}, function(err){
+            if (err) {
+                throw new Meteor.Error("Twitch login failed");
+            }
+        });
+    },
+
+    'click #logout': function(event) {
+        Meteor.logout(function(err){
+            if (err) {
+                throw new Meteor.Error("Logout failed");
+            }
+        })
+    }
+});
